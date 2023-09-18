@@ -1,0 +1,86 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color:#f5ddec;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; 
+    margin: 0;
+}
+
+.funky-text {
+    font-size: 36px;
+    text-align: center;
+    text-transform: uppercase;
+    color: black; 
+    padding: 10px;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; /* Change the font family */
+}
+
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    max-width: 800px;
+}
+
+.picker {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+h1 {
+    font-size: 24px;
+}
+
+#picked-item {
+    font-size: 36px;
+    margin-bottom: 20px;
+    color: green; 
+}
+
+#pick-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #2a7d2ad6;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    outline: none;
+}
+
+.numbers-grid {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr); 
+    gap: 10px;
+    text-align: center;
+    justify-items: center;
+}
+
+.number {
+    font-size: 16px;
+    width: 40px; 
+    height: 40px; 
+    line-height: 40px; 
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    user-select: none;
+    pointer-events: none;
+}
+
+.number.selected {
+    background-color: green;
+    color: white;
+}
