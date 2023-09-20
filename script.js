@@ -4,6 +4,7 @@ const numbersContainer = document.getElementById('numbers-container');
 const coinAudio = document.getElementById('coin-audio');
 const coinToggle = document.getElementById('coin-toggle');
 const speechToggle = document.getElementById('speech-toggle');
+const repeatToggle = document.getElementById('repeat-toggle');
 const minNumber = 1; 
 const maxNumber = 90; 
 const synth = window.speechSynthesis;
@@ -49,9 +50,18 @@ pickButton.addEventListener('click', () => {
         }
     }
     if (speechToggle.checked) {
-    setTimeout(() => {
-        const utterance = new SpeechSynthesisUtterance(`The number is ${randomItem.toString()}`);
-        synth.speak(utterance);
-    }, 900);
+        if(repeatToggle.checked){
+            for(let i = 0;i<2;i++ ){
+                setTimeout(() => {
+                    const utterance = new SpeechSynthesisUtterance(`The number is ${randomItem.toString()}`);
+                    synth.speak(utterance);
+                }, 900);
+        }   }
+        else{
+            setTimeout(() => {
+                const utterance = new SpeechSynthesisUtterance(`The number is ${randomItem.toString()}`);
+                synth.speak(utterance);
+            }, 900);
+        }
     }
 });
