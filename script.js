@@ -5,12 +5,13 @@ const coinAudio = document.getElementById('coin-audio');
 const coinToggle = document.getElementById('coin-toggle');
 const speechToggle = document.getElementById('speech-toggle');
 const repeatToggle = document.getElementById('repeat-toggle');
+const timeIntervalSelect = document.getElementById('time-interval');
 const minNumber = 1; 
 const maxNumber = 90; 
 const synth = window.speechSynthesis;
 
+let autoGenerateInterval;
 const pickedItems = new Set(); 
-
 
 const availableNumbers = Array.from({ length: maxNumber - minNumber + 1 }, (_, index) => index + minNumber);
 
@@ -27,7 +28,7 @@ for (let i = minNumber; i <= maxNumber; i++) {
     numbersContainer.appendChild(numberElement);
 }
 
-pickButton.addEventListener('click', () => {
+function generateNumber() {
     if (availableNumbers.length === 0) {
         pickedItemElement.textContent = 'Game Over';
         pickButton.disabled = true;
@@ -39,7 +40,7 @@ pickButton.addEventListener('click', () => {
     pickedItemElement.textContent = randomItem;
 
     if (coinToggle.checked) {
-    coinAudio.play();
+        coinAudio.play();
     }
 
     const pickedNumberElements = document.querySelectorAll('.number');
@@ -50,18 +51,33 @@ pickButton.addEventListener('click', () => {
         }
     }
     if (speechToggle.checked) {
-        if(repeatToggle.checked){
-            for(let i = 0;i<2;i++ ){
+        if (repeatToggle.checked) {
+            for (let i = 0; i < 2; i++) {
                 setTimeout(() => {
                     const utterance = new SpeechSynthesisUtterance(`The number is ${randomItem.toString()}`);
                     synth.speak(utterance);
                 }, 900);
-        }   }
-        else{
+            }
+        } else {
             setTimeout(() => {
                 const utterance = new SpeechSynthesisUtterance(`The number is ${randomItem.toString()}`);
                 synth.speak(utterance);
             }, 900);
         }
+    }
+}
+
+pickButton.addEventListener('click', () => {
+    generateNumber(); 
+});
+
+timeIntervalSelect.addEventListener('change', () => {
+    const selectedInterval = parseInt(timeIntervalSelect.value);
+    clearInterval(autoGenerateInterval);
+    
+    if (selectedInterval > 0) {
+        autoGenerateInterval = setInterval(() => {
+            generateNumber();
+        }, selectedInterval);
     }
 });
