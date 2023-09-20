@@ -1,8 +1,10 @@
 const pickedItemElement = document.getElementById('picked-item');
 const pickButton = document.getElementById('pick-button');
 const numbersContainer = document.getElementById('numbers-container');
+const coinAudio = document.getElementById('coin-audio');
 const minNumber = 1; 
 const maxNumber = 90; 
+const synth = window.speechSynthesis;
 
 const pickedItems = new Set(); 
 
@@ -33,6 +35,8 @@ pickButton.addEventListener('click', () => {
     const randomItem = availableNumbers.splice(randomIndex, 1)[0]; 
     pickedItemElement.textContent = randomItem;
 
+    coinAudio.play();
+
     const pickedNumberElements = document.querySelectorAll('.number');
     for (const element of pickedNumberElements) {
         if (parseInt(element.textContent) === randomItem) {
@@ -40,4 +44,8 @@ pickButton.addEventListener('click', () => {
             break; 
         }
     }
+    setTimeout(() => {
+        const utterance = new SpeechSynthesisUtterance(`The number is ${randomItem.toString()}`);
+        synth.speak(utterance);
+    }, 900);
 });
