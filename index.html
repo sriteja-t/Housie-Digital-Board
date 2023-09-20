@@ -12,11 +12,20 @@
             <div class="funky-text">
                 Housie Board
             </div>
+            <div class="options">
+                <label>
+                    <input type="checkbox" id="coin-toggle" checked> Enable Sound
+                </label>
+                <label>
+                    <input type="checkbox" id="speech-toggle" checked> Enable Speech
+                </label>
+            </div>
             <p id="picked-item">?</p>
             <button id="pick-button">Pick a Coin</button>
         </div>
         <div class="numbers-grid" id="numbers-container"></div>
     </div>
+
     <audio id="coin-audio" src="coin.mp3"></audio>
     <script src="script.js"></script>
 </body>
